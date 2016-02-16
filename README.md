@@ -1,6 +1,6 @@
 # Dendrogram: Create a Family Tree Using the Java Persistence API
 This Java application generates a graphical representation of a family tree, based on genealogical data stored in a
-relational database. The program outputs a DOT graph description language script, that may be used to create
+relational database. The program outputs a DOT graph description language script, which may be used to create
 an image file.
 
 ## Installation
