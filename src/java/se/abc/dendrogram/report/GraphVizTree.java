@@ -104,7 +104,6 @@ public final class GraphVizTree {
 		final Collection<Event> birthEvents = person.getEvents(birth);
 		final Collection<Event> deathEvents = person.getEvents(death);
 
-		/* TODO: Internationalize abbreviations. */
 		if (deathEvents.isEmpty())
 			buf.append(BIRTH).append(' ').append(newPoint(birthEvents, null));
 		else if (birthEvents.isEmpty())
