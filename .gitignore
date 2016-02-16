@@ -1,0 +1,10 @@
+/build/
+/doc/
+/dist/
+/sample/
+#/data/
+*~
+.classpath
+.project
+*.bak
+README.html
