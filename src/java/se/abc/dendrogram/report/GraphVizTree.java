@@ -47,14 +47,14 @@ public final class GraphVizTree {
 	public String getTree(final Person person) {
 		final StringBuilder buf = new StringBuilder();
 		buf.append("digraph G {\n");
-		buf.append(INDENT).append(newNodeProperties()).append('\n');
-		buf.append(INDENT).append(newEdgeProperties()).append('\n');
+		buf.append(INDENT).append(nodeProperties()).append('\n');
+		buf.append(INDENT).append(edgeProperties()).append('\n');
 		buf.append(getSubTree(person));
 		buf.append("}");
 		return buf.toString();
 	}
 
-	private static String newEdgeProperties() {
+	private static String edgeProperties() {
 		final StringBuilder buf = new StringBuilder();
 		buf.append("edge [");
 		buf.append("fontsize=\"").append(FONT_SIZE).append("\", ");
@@ -66,7 +66,7 @@ public final class GraphVizTree {
 		return buf.toString();
 	}
 
-	private static String newNodeProperties() {
+	private static String nodeProperties() {
 		final StringBuilder buf = new StringBuilder();
 		buf.append("node [");
 		buf.append("shape=\"").append(SHAPE).append("\", ");
@@ -83,7 +83,7 @@ public final class GraphVizTree {
 		return calendar.get(Calendar.YEAR);
 	}
 
-	private static String newPoint(final Collection<Event> events, Integer priorYear) {
+	private static String point(final Collection<Event> events, Integer priorYear) {
 		final StringBuilder buf = new StringBuilder();
 		for (Iterator<Event> it = events.iterator(); it.hasNext();) {
 			final Integer thisYear = year(it.next().getDate());
@@ -99,27 +99,27 @@ public final class GraphVizTree {
 		return year(events.iterator().next().getDate());
 	}
 
-	private String newLifeSpan(final Person person) {
+	private String lifeSpan(final Person person) {
 		final StringBuilder buf = new StringBuilder();
 		final Collection<Event> birthEvents = person.getEvents(birth);
 		final Collection<Event> deathEvents = person.getEvents(death);
 
 		if (deathEvents.isEmpty())
-			buf.append(BIRTH).append(' ').append(newPoint(birthEvents, null));
+			buf.append(BIRTH).append(' ').append(point(birthEvents, null));
 		else if (birthEvents.isEmpty())
-			buf.append(DEATH).append(' ').append(newPoint(deathEvents, null));
+			buf.append(DEATH).append(' ').append(point(deathEvents, null));
 		else
-			buf.append(newPoint(birthEvents, null)).append('-').append(newPoint(deathEvents, year(birthEvents)));
+			buf.append(point(birthEvents, null)).append('-').append(point(deathEvents, year(birthEvents)));
 		return buf.toString();
 	}
 
-	private String newLabel(final Person person) {
+	private String label(final Person person) {
 		final StringBuilder buf = new StringBuilder();
 		buf.append("[");
 		final String name = person.getName();
 		buf.append("label=\"").append(name == null ? "N.N." : name);
 		if (!person.getEvents().isEmpty())
-			buf.append(" ").append('(').append(newLifeSpan(person)).append(')');
+			buf.append(" ").append('(').append(lifeSpan(person)).append(')');
 		final String title = person.getTitle();
 		if (title != null)
 			buf.append("\\n").append(title);
@@ -128,41 +128,39 @@ public final class GraphVizTree {
 		return buf.toString();
 	}
 
-	private String newNode(final Person person) {
+	private String node(final Person person) {
 		final StringBuilder buf = new StringBuilder();
 		buf.append("{node ");
-		buf.append(newLabel(person));
+		buf.append(label(person));
 		buf.append(person.getId());
 		buf.append("};");
 		buf.append('\n');
 		return buf.toString();
 	}
 
-	private static String newEdge(final String from, final String to, final String label) {
+	private static String edge(final String from, final String to, final String label) {
 		final StringBuilder buf = new StringBuilder();
 		buf.append(from).append(" -> ").append(to);
 		buf.append("[label=\"").append(label).append("\"];");
 		return buf.toString();
 	}
 
+	private String parent(final long child, final Person person, final String gender) {
+		final StringBuilder buf = new StringBuilder();
+		if (person != null) {
+			buf.append(getSubTree(person));
+			buf.append(INDENT).append(edge(person.getId().toString(), Long.toString(child), gender)).append('\n');
+		}
+		return buf.toString();
+	}
+
 	private String getSubTree(final Person person) {
 		final StringBuilder buf = new StringBuilder();
-		final Person mother = person.getMother();
-		if (mother != null)
-			buf.append(getSubTree(mother));
 
-		final Person father = person.getFather();
-		if (father != null)
-			buf.append(getSubTree(father));
+		buf.append(INDENT).append(node(person));
 
-		buf.append(INDENT).append(newNode(person));
-
-		if (mother != null)
-			buf.append(INDENT).append(newEdge(mother.getId().toString(), person.getId().toString(), VENUS))
-					.append('\n');
-
-		if (father != null)
-			buf.append(INDENT).append(newEdge(father.getId().toString(), person.getId().toString(), MARS)).append('\n');
+		buf.append(parent(person.getId(), person.getMother(), VENUS));
+		buf.append(parent(person.getId(), person.getFather(), MARS));
 
 		return buf.toString();
 	}
