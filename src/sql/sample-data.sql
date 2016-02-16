@@ -229,3 +229,77 @@ INSERT INTO person (name,title,father,mother) VALUES ('Maria Stuart','Regerande 
 INSERT INTO event (person,type,date) VALUES (67,1,'1542-12-08');
 INSERT INTO event (person,type,date) VALUES (67,2,'1587-02-08');
 
+INSERT INTO person (name,title,father,mother) VALUES ('Henry Stuart, lord Darnley','Förste hertig av Albany',NULL,NULL);
+INSERT INTO event (person,type,date) VALUES (68,1,'1545-12-07');
+INSERT INTO event (person,type,date) VALUES (68,2,'1567-02-10');
+
+INSERT INTO person (name,title,father,mother) VALUES ('Jakob I','Kung av England',68,67);
+INSERT INTO event (person,type,date) VALUES (69,1,'1566-06-19');
+INSERT INTO event (person,type,date) VALUES (69,2,'1625-03-27');
+
+-- 70
+INSERT INTO person (name,title,father,mother) VALUES ('Anna av Danmark','Drottning av England',NULL,NULL);
+INSERT INTO event (person,type,date) VALUES (70,1,'1574-12-12');
+INSERT INTO event (person,type,date) VALUES (70,2,'1619-03-04');
+
+INSERT INTO person (name,title,father,mother) VALUES ('Elisabet Stuart','Drottning av Böhmen',69,70);
+INSERT INTO event (person,type,date) VALUES (71,1,'1596-08-19');
+INSERT INTO event (person,type,date) VALUES (71,2,'1662-02-13');
+
+INSERT INTO person (name,title,father,mother) VALUES ('Fredrik V av Pfalz','Vinterkungen',NULL,NULL);
+INSERT INTO event (person,type,date) VALUES (72,1,'1596-08-16');
+INSERT INTO event (person,type,date) VALUES (72,2,'1632-11-29');
+
+INSERT INTO person (name,title,father,mother) VALUES ('Sofia av Pfalz','Kurfurstinna av Hannover',72,71);
+INSERT INTO event (person,type,date) VALUES (73,1,'1630-10-14');
+INSERT INTO event (person,type,date) VALUES (73,2,'1714-06-08');
+
+INSERT INTO person (name,title,father,mother) VALUES ('Ernst August av Hannover','Kurfurste av Hannover',NULL,NULL);
+INSERT INTO event (person,type,date) VALUES (74,1,'1629-11-20');
+INSERT INTO event (person,type,date) VALUES (74,2,'1698-01-23');
+
+INSERT INTO person (name,title,father,mother) VALUES ('Georg I','Kurfurste av Hannover',74,73);
+INSERT INTO event (person,type,date) VALUES (75,1,'1660-05-28');
+INSERT INTO event (person,type,date) VALUES (75,2,'1727-06-11');
+
+INSERT INTO person (name,title,father,mother) VALUES ('Sofia Dorotea av Celle','Kurfurstinna av Hannover',NULL,NULL);
+INSERT INTO event (person,type,date) VALUES (76,1,'1666-09-15');
+INSERT INTO event (person,type,date) VALUES (76,2,'1726-11-13');
+
+INSERT INTO person (name,title,father,mother) VALUES ('Georg II','Kung av Storbritannien och Irland',75,76);
+INSERT INTO event (person,type,date) VALUES (77,1,'1683-09-09');
+INSERT INTO event (person,type,date) VALUES (77,2,'1760-10-25');
+
+INSERT INTO person (name,title,father,mother) VALUES ('Caroline av Ansbach','Drottning av Storbritannien och Irland',NULL,NULL);
+INSERT INTO event (person,type,date) VALUES (78,1,'1683-03-01');
+INSERT INTO event (person,type,date) VALUES (78,2,'1737-11-20');
+
+INSERT INTO person (name,title,father,mother) VALUES ('Fredrik','Prins av Wales',77,78);
+INSERT INTO event (person,type,date) VALUES (79,1,'1707-02-01');
+INSERT INTO event (person,type,date) VALUES (79,2,'1751-03-31');
+
+-- 80
+INSERT INTO person (name,title,father,mother) VALUES ('Augusta av Sachsen-Gotha','Prinsessa av Wales',NULL,NULL);
+INSERT INTO event (person,type,date) VALUES (80,1,'1719-11-30');
+INSERT INTO event (person,type,date) VALUES (80,2,'1772-02-08');
+
+INSERT INTO person (name,title,father,mother) VALUES ('Georg III','Kung av Förenade kungariket Storbritannien och Irland',79,80);
+INSERT INTO event (person,type,date) VALUES (81,1,'1738-06-04');
+INSERT INTO event (person,type,date) VALUES (81,2,'1820-01-29');
+
+INSERT INTO person (name,title,father,mother) VALUES ('Charlotte av Mecklenburg-Strelitz','Drottning av Storbritannien',NULL,NULL);
+INSERT INTO event (person,type,date) VALUES (82,1,'1744-05-19');
+INSERT INTO event (person,type,date) VALUES (82,2,'1818-11-17');
+
+INSERT INTO person (name,title,father,mother) VALUES ('Edvard','Hertig av Kent och Strathearn',81,82);
+INSERT INTO event (person,type,date) VALUES (83,1,'1767-11-02');
+INSERT INTO event (person,type,date) VALUES (83,2,'1820-01-23');
+
+INSERT INTO person (name,title,father,mother) VALUES ('Viktoria av Sachsen-Coburg-Saalfeld','Hertiginna av Kent',NULL,NULL);
+INSERT INTO event (person,type,date) VALUES (84,1,'1786-08-17');
+INSERT INTO event (person,type,date) VALUES (84,2,'1861-03-16');
+
+INSERT INTO person (name,title,father,mother) VALUES ('Viktoria I','Drottning av Förenade kungariket Storbritannien och Irland',83,84);
+INSERT INTO event (person,type,date) VALUES (85,1,'1819-05-24');
+INSERT INTO event (person,type,date) VALUES (85,2,'1901-01-22');
+
