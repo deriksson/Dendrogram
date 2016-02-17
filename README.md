@@ -39,7 +39,7 @@ is an example command:
 > `java -classpath dist/dendrogram.jar:lib/deploy/orm/hibernate/*:lib/deploy/logging/*:lib/deploy/jdbc/* se.abc.dendrogram.report.GraphVizTreeApplication 5`
 
 The DOT code may be redirected to a file, for further processing by the Graphviz application:
-> `java -classpath dist/dendrogram.jar:lib/deploy/* se.abc.dendrogram.report.GraphVizTreeApplication 5 > /tmp/family-tree.dot`  
+> `java -classpath dist/dendrogram.jar:lib/deploy/orm/hibernate/*:lib/deploy/logging/*:lib/deploy/jdbc/* se.abc.dendrogram.report.GraphVizTreeApplication 5 > /tmp/family-tree.dot`  
 > `dot -Tpng -Gcharset=utf8 -o/tmp/family-tree.png /tmp/family-tree.dot`
 
 These commands may be piped like this:
