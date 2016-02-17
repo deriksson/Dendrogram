@@ -1,34 +1,31 @@
 <?xml version="1.0"?>
 <persistence xmlns="http://java.sun.com/xml/ns/persistence"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    version="1.0">
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+             version="2.0">
+  
+  <persistence-unit name="FamilyTree">
+    <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+    
+    <properties>
+      <property name="hibernate.archive.autodetection" value="class"/>
 
-      <persistence-unit name="FamilyTree" transaction-type="RESOURCE_LOCAL">
-        <provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider>
+      <!--  PostgreSQL connection -->
+      <property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5432/family_tree"/>
+      <property name="hibernate.connection.username" value="genealogist"/>
+      <property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
+      <property name="hibernate.connection.password" value="Dtyhboys"/>
+      
+      <property name="transaction.factory_class" value="org.hibernate.transaction.JDBCTransactionFactory"/>
+      
+      <!--  thread is the short name for
+	   org.hibernate.context.ThreadLocalSessionContext
+	   and lets Hibernate bind the session automatically to the thread
+      -->
+      <property name="hibernate.current_session_context_class" value="thread"/>
+      <!-- this will (not) show us all sql statements -->
+      <property name="hibernate.show_sql" value="false"/>
 
-	<!-- Classes may instead be loaded based on annotations, but that requires the OpenJPA
-	     enhancement and may throw a duplicate class definition error -->
-	<class>se.abc.dendrogram.model.Event</class>
-	<class>se.abc.dendrogram.model.EventType</class>
-	<class>se.abc.dendrogram.model.Person</class>
-	
-
-        <properties>
-            <property name="openjpa.ConnectionURL" 
-                value="jdbc:postgresql://localhost:5432/family_tree"/>
-            <property name="openjpa.ConnectionDriverName" 
-                value="org.postgresql.Driver"/>
-            <property name="openjpa.ConnectionUserName" 
-                value="genealogist"/>
-            <property name="openjpa.ConnectionPassword" 
-                      value="Dtyhboys"/>
-	    
-	    <!-- If you unset the following property, you might have to provide the -XX:+AlwaysLockClassLoader
-		 parameter to your JVM.-->
-	    <property name="openjpa.RuntimeUnenhancedClasses" value="supported"/>
-	    <!-- Inhibit JPA startup messaages. -->
-	    <property name="openjpa.Log" value="DefaultLevel=WARN, Tool=INFO"/>
-        </properties>
-   </persistence-unit>
-	
+    </properties>
+  </persistence-unit>
 </persistence>

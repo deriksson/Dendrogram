@@ -1,94 +1,97 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <project name="Dendrogram" default="jar" basedir=".">
-	<description>Builds a family tree application.</description>
+  <description>Builds a family tree application.</description>
 
-	<property file="build.properties" />
+  <property file="build.properties" />
 
-	<property name="lib" location="lib" />
-	<property name="build" location="build" />
-	<property name="dist" location="dist" />
-	<property name="src" location="src" />
+  <property name="lib" location="lib" />
+  <property name="build" location="build" />
+  <property name="dist" location="dist" />
+  <property name="src" location="src" />
 
-	<property name="distribution-jar" location="${dist}/${name}.jar" />
+  <property name="distribution-jar" location="${dist}/${name}.jar" />
 
-	<path id="compile.classpath">
-		<fileset dir="${lib}/devel">
-			<include name="**/*.jar" />
-		</fileset>
-	</path>
+  <path id="compile.classpath">
+    <fileset dir="${lib}/devel">
+      <include name="**/*.jar" />
+    </fileset>
+  </path>
 
-	<path id="generate.classpath">
-		<pathelement path="${src}/metadata" />
-		<fileset dir="${dist}">
-			<include name="**/*.jar" />
-		</fileset>
-		<fileset dir="${lib}">
-			<include name="**/*.jar" />
-		</fileset>
-	</path>
+  <path id="generate.classpath">
+    <pathelement path="${src}/metadata" />
+    <fileset dir="${dist}">
+      <include name="**/*.jar" />
+    </fileset>
+    <fileset dir="${lib}">
+      <include name="**/*.jar" />
+    </fileset>
+  </path>
 
-	<path id="test.classpath">
-		<pathelement path="${build}" />
-		<pathelement path="${src}/metadata" />
-		<fileset dir="${lib}">
-			<include name="**/*.jar" />
-		</fileset>
-	</path>
+  <path id="test.classpath">
+    <pathelement path="${build}" />
+    <pathelement path="${src}/metadata" />
+    <fileset dir="${lib}">
+      <include name="**/*.jar" />
+    </fileset>
+  </path>
 
-	<target name="compile" description="Compiles the source code.">
-		<mkdir dir="${build}" />
-		<javac includeantruntime="false" srcdir="${src}/java" destdir="${build}" nowarn="off" debug="on">
-			<classpath refid="compile.classpath" />
-		</javac>
-	</target>
+  <target name="compile" description="Compiles the source code.">
+    <mkdir dir="${build}" />
+    <javac includeantruntime="false" srcdir="${src}/java" destdir="${build}" nowarn="off" debug="on">
+      <classpath refid="compile.classpath" />
+    </javac>
+  </target>
 
-	<target name="clean" description="Clean up">
-		<delete dir="${build}" />
-		<delete dir="${dist}" />
-	</target>
+  <target name="clean" description="Clean up">
+    <delete dir="${build}" />
+    <delete dir="${dist}" />
+  </target>
 
-	<target name="test" depends="compile" description="Runs JUnit tests">
-		<copy todir="${build}/META-INF" flatten="true">
-			<fileset dir="${src}/metadata">
-				<include name="persistence.xml" />
-			</fileset>
-		</copy>
-		<junit>
-			<classpath refid="test.classpath" />
-			<formatter type="brief" usefile="false" />
-			<batchtest fork="yes">
-				<fileset dir="${build}">
-					<include name="**/*Test.class" />
-				</fileset>
-			</batchtest>
-		</junit>
-	</target>
+  <target name="test" depends="compile" description="Runs JUnit tests">
+    <copy todir="${build}/META-INF" flatten="true">
+      <fileset dir="${src}/metadata">
+	<include name="persistence.xml" />
+      </fileset>
+    </copy>
+    <junit>
+      <classpath refid="test.classpath" />
+      <formatter type="brief" usefile="false" />
+      <batchtest fork="yes">
+	<fileset dir="${build}">
+	  <include name="**/*Test.class" />
+	</fileset>
+      </batchtest>
+    </junit>
+  </target>
 
-	<target name="generate" depends="jar">
-		<antcall target="tree-generator">
-			<param name="person-id" value="59" />
-			<param name="output-file" value="${dist}/family-tree-edward-iv.dot" />
-		</antcall>
-	</target>
+  <target name="generate" depends="jar">
+    <antcall target="tree-generator">
+      <param name="person-id" value="59" />
+      <param name="output-file" value="${dist}/family-tree-edward-iv.dot" />
+    </antcall>
+  </target>
 
-	<target name="tree-generator">
-		<java classname="se.pervasiveedge.dendrogram.report.GraphVizTreeApplication" fork="true">
-			<arg line="${person-id}" />
-			<classpath refid="generate.classpath" />
-			<redirector output="${output-file}" />
-		</java>
-	</target>
+  <target name="tree-generator">
+    <java classname="se.pervasiveedge.dendrogram.report.GraphVizTreeApplication" fork="true">
+      <arg line="${person-id}" />
+      <classpath refid="generate.classpath" />
+      <redirector output="${output-file}" />
+    </java>
+  </target>
 
-	<target name="jar" depends="compile">
-		<mkdir dir="${dist}" />
-		<jar destfile="${distribution-jar}" basedir="${build}" excludes="**/*Test.class">
-			<manifest>
-				<attribute name="Built-By" value="${user.name}" />
-			</manifest>
-			<metainf dir="${src}/metadata/">
-				<include name="persistence.xml" />
-			</metainf>
-		</jar>
-	</target>
+  <target name="jar" depends="compile">
+    <mkdir dir="${dist}" />
+    <jar destfile="${distribution-jar}" basedir="${build}" excludes="**/*Test.class">
+      <manifest>
+	<attribute name="Built-By" value="${user.name}" />
+      </manifest>
+      <metainf dir="${src}/metadata/">
+	<include name="persistence.xml" />
+      </metainf>
+      <fileset dir="${src}/metadata">
+	<include name="log4j2.xml"/>
+      </fileset>
+    </jar>
+  </target>
 </project>

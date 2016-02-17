@@ -21,8 +21,12 @@ then used to generate an image file from the script. The following command insta
 based Linux system:
 > `sudo apt-get install graphviz`
 
-Finally, you need to compile the Java application. The following command creates a JAR file in the `dist` sub-directory:
-> `ant`
+Finally, you need to compile the Java application.
+1. Download the application source code, using git:  
+   `git clone git://github.com/deriksson/Dendrogram.git`.
+
+2. The following command creates a JAR file in the `dist` sub-directory:  
+   `ant`
 
 ## Usage
 The Dendrogram application is run from the command line. The general format of the command looks like this:
@@ -32,11 +36,11 @@ The person ID is an integer corresponding to the record in the database, that co
 known ancestors of the record will be included in the graph. The DOT code will be output to the system output stream. Here
 is an example command:
 
-> `java -classpath dist/dendrogram.jar:lib/deploy/* se.abc.dendrogram.report.GraphVizTreeApplication 5`
+> `java -classpath dist/dendrogram.jar:lib/deploy/orm/hibernate/*:lib/deploy/logging/*:lib/deploy/jdbc/* se.abc.dendrogram.report.GraphVizTreeApplication 5`
 
 The DOT code may be redirected to a file, for further processing by the Graphviz application:
 > `java -classpath dist/dendrogram.jar:lib/deploy/* se.abc.dendrogram.report.GraphVizTreeApplication 5 > /tmp/family-tree.dot`  
 > `dot -Tpng -Gcharset=utf8 -o/tmp/family-tree.png /tmp/family-tree.dot`
 
 These commands may be piped like this:
-> `dot -Tpng -Gcharset=utf8 -o/tmp/family-tree.png <(java -classpath dist/dendrogram.jar:lib/deploy/* se.abc.dendrogram.report.GraphVizTreeApplication 5)`
+> `dot -Tpng -Gcharset=utf8 -o/tmp/family-tree.png <(java -classpath dist/dendrogram.jar:lib/deploy/orm/hibernate/*:lib/deploy/logging/*:lib/deploy/jdbc/* se.abc.dendrogram.report.GraphVizTreeApplication 5)`

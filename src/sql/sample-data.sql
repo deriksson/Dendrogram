@@ -328,3 +328,10 @@ INSERT INTO person (name,title,father,mother) VALUES ('Gustaf Adolf','Sveriges A
 INSERT INTO event (person,type,date) VALUES (91,1,'1906-04-22');
 INSERT INTO event (person,type,date) VALUES (91,2,'1947-01-26');
 
+INSERT INTO person (name,title,father,mother) VALUES ('Sibylla av Sachsen-Coburg-Gotha','Prinsessa av Sverige',NULL,NULL);
+INSERT INTO event (person,type,date) VALUES (92,1,'1908-01-18');
+INSERT INTO event (person,type,date) VALUES (92,2,'1972-11-28');
+
+INSERT INTO person (name,title,father,mother) VALUES ('Carl XVI Gustaf','Sveriges kung',91,92);
+INSERT INTO event (person,type,date) VALUES (93,1,'1946-04-30');
+
