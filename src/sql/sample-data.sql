@@ -303,3 +303,28 @@ INSERT INTO person (name,title,father,mother) VALUES ('Viktoria I','Drottning av
 INSERT INTO event (person,type,date) VALUES (85,1,'1819-05-24');
 INSERT INTO event (person,type,date) VALUES (85,2,'1901-01-22');
 
+INSERT INTO person (name,title,father,mother) VALUES ('Albert av Sachsen-Coburg-Gotha','Brittisk prinsgemål',NULL,NULL);
+INSERT INTO event (person,type,date) VALUES (86,1,'1819-08-26');
+INSERT INTO event (person,type,date) VALUES (86,2,'1861-12-14');
+
+INSERT INTO person (name,title,father,mother) VALUES ('Arthur','Hertig av Connaught och Strathearn',86,85);
+INSERT INTO event (person,type,date) VALUES (87,1,'1850-05-01');
+INSERT INTO event (person,type,date) VALUES (87,2,'1942-01-16');
+
+INSERT INTO person (name,title,father,mother) VALUES ('Luise Margarete av Preussen','Hertiginna av Connaught',NULL,NULL);
+INSERT INTO event (person,type,date) VALUES (88,1,'1860-07-25');
+INSERT INTO event (person,type,date) VALUES (88,2,'1917-03-14');
+
+INSERT INTO person (name,title,father,mother) VALUES ('Margareta av Storbritannien och Irland',' Kronprinsessa av Sverige ',87,88);
+INSERT INTO event (person,type,date) VALUES (89,1,'1882-01-15');
+INSERT INTO event (person,type,date) VALUES (89,2,'1920-05-01');
+
+-- 90
+INSERT INTO person (name,title,father,mother) VALUES ('Gustaf VI Adolf','Sveriges, Götes och Vendes konung',NULL,NULL);
+INSERT INTO event (person,type,date) VALUES (90,1,'1882-11-11');
+INSERT INTO event (person,type,date) VALUES (90,2,'1973-09-15');
+
+INSERT INTO person (name,title,father,mother) VALUES ('Gustaf Adolf','Sveriges Arvfurste',90,89);
+INSERT INTO event (person,type,date) VALUES (91,1,'1906-04-22');
+INSERT INTO event (person,type,date) VALUES (91,2,'1947-01-26');
+
