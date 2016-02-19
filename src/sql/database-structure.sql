@@ -3,8 +3,8 @@ CREATE TABLE person (
   id INTEGER NOT NULL DEFAULT nextval('person_id_seq'),
   name varchar(100),
   title varchar(100),
-  father INTEGER,
-  mother INTEGER,
+  father INTEGER REFERENCES person(id),
+  mother INTEGER REFERENCES person(id),
   PRIMARY KEY (id)
 );
 CREATE INDEX person_father_index ON person (father);

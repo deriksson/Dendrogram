@@ -328,14 +328,23 @@ INSERT INTO person (name,title,father,mother) VALUES ('Gustaf Adolf','Sveriges A
 INSERT INTO event (person,type,date) VALUES (91,1,'1906-04-22');
 INSERT INTO event (person,type,date) VALUES (91,2,'1947-01-26');
 
-INSERT INTO person (name,title,father,mother) VALUES ('Victoria Adelheid ','Prinsessa av Schleswig-Holstein-Sonderburg-Glücksburg',NULL,NULL);
+INSERT INTO person (name,title,father,mother) VALUES ('Victoria Adelheid','Prinsessa av Schleswig-Holstein-Sonderburg-Glücksburg',NULL,NULL);
 INSERT INTO event (person,type,date) VALUES (92,1,'1885-12-31');
 INSERT INTO event (person,type,date) VALUES (92,2,'1970-10-03');
 
-INSERT INTO person (name,title,father,mother) VALUES ('Sibylla av Sachsen-Coburg-Gotha','Prinsessa av Sverige',NULL,92);
-INSERT INTO event (person,type,date) VALUES (93,1,'1908-01-18');
-INSERT INTO event (person,type,date) VALUES (93,2,'1972-11-28');
+INSERT INTO person (name,title,father,mother) VALUES ('Karl Edvard','Hertig av Albany',NULL,NULL);
+INSERT INTO event (person,type,date) VALUES (93,1,'1884-07-19');
+INSERT INTO event (person,type,date) VALUES (93,2,'1954-03-06');
 
-INSERT INTO person (name,title,father,mother) VALUES ('Carl XVI Gustaf','Sveriges kung',91,93);
-INSERT INTO event (person,type,date) VALUES (94,1,'1946-04-30');
+INSERT INTO person (name,title,father,mother) VALUES ('Sibylla av Sachsen-Coburg-Gotha','Prinsessa av Sverige',93,92);
+INSERT INTO event (person,type,date) VALUES (94,1,'1908-01-18');
+INSERT INTO event (person,type,date) VALUES (94,2,'1972-11-28');
 
+INSERT INTO person (name,title,father,mother) VALUES ('Carl XVI Gustaf','Sveriges kung',91,94);
+INSERT INTO event (person,type,date) VALUES (95,1,'1946-04-30');
+
+INSERT INTO person (name,title,father,mother) VALUES ('Leopold','Hertig av Albany',86,85);
+INSERT INTO event (person,type,date) VALUES (96,1,'1853-04-07');
+INSERT INTO event (person,type,date) VALUES (96,2,'1884-03-28');
+
+--UPDATE person SET father = 96 WHERE id = 93;

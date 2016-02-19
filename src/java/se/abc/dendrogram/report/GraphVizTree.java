@@ -8,18 +8,19 @@ import java.util.Iterator;
 import se.abc.dendrogram.model.Event;
 import se.abc.dendrogram.model.EventType;
 import se.abc.dendrogram.model.Person;
+import se.abc.dot.Edge;
+import se.abc.dot.EdgeProperties;
+import se.abc.dot.Font;
+import se.abc.dot.Node;
+import se.abc.dot.NodeProperties;
 
 public final class GraphVizTree {
 
-	private static final String SHAPE = "plaintext";
+	private static final String FONT_NAME = "Helvetica";
 
 	private static final String FONT_COLOR = "black";
 
-	private static final String EDGE_COLOR = "gray";
-
-	private static final String FONT_NAME = "Helvetica";
-
-	private static final String ARROW_HEAD = "none";
+	private static final int FONT_SIZE = 8;
 
 	private static final String INDENT = "  ";
 
@@ -31,9 +32,13 @@ public final class GraphVizTree {
 
 	private static final String DEATH = "🎗";
 
-	private static final int FONT_SIZE = 8;
-
 	private static final int BASE = 10;
+
+	private static final CharSequence NODE = new NodeProperties(new Font(FONT_NAME, FONT_SIZE, FONT_COLOR),
+			"plaintext");
+
+	private static final CharSequence EDGE = new EdgeProperties(new Font(FONT_NAME, FONT_SIZE, FONT_COLOR), "gray",
+			"none");
 
 	private final EventType birth;
 
@@ -47,33 +52,10 @@ public final class GraphVizTree {
 	public String getTree(final Person person) {
 		final StringBuilder buf = new StringBuilder();
 		buf.append("digraph G {\n");
-		buf.append(INDENT).append(nodeProperties()).append('\n');
-		buf.append(INDENT).append(edgeProperties()).append('\n');
+		buf.append(INDENT).append(NODE).append('\n');
+		buf.append(INDENT).append(EDGE).append('\n');
 		buf.append(getSubTree(person));
 		buf.append("}");
-		return buf.toString();
-	}
-
-	private static String edgeProperties() {
-		final StringBuilder buf = new StringBuilder();
-		buf.append("edge [");
-		buf.append("fontsize=\"").append(FONT_SIZE).append("\", ");
-		buf.append("fontname=").append(FONT_NAME).append(", ");
-		buf.append("color=").append(EDGE_COLOR).append(", ");
-		buf.append("arrowhead=").append(ARROW_HEAD).append(", ");
-		buf.append("labelfontcolor=").append(FONT_COLOR);
-		buf.append("]");
-		return buf.toString();
-	}
-
-	private static String nodeProperties() {
-		final StringBuilder buf = new StringBuilder();
-		buf.append("node [");
-		buf.append("shape=\"").append(SHAPE).append("\", ");
-		buf.append("fontsize=\"").append(FONT_SIZE).append("\", ");
-		buf.append("fontname=").append(FONT_NAME).append(", ");
-		buf.append("fontcolor=").append(FONT_COLOR);
-		buf.append("]");
 		return buf.toString();
 	}
 
@@ -115,33 +97,14 @@ public final class GraphVizTree {
 
 	private String label(final Person person) {
 		final StringBuilder buf = new StringBuilder();
-		buf.append("[");
+		
 		final String name = person.getName();
-		buf.append("label=\"").append(name == null ? "N.N." : name);
+		buf.append(name == null ? "N.N." : name);
 		if (!person.getEvents().isEmpty())
 			buf.append(" ").append('(').append(lifeSpan(person)).append(')');
 		final String title = person.getTitle();
 		if (title != null)
 			buf.append("\\n").append(title);
-		buf.append("\"");
-		buf.append("];");
-		return buf.toString();
-	}
-
-	private String node(final Person person) {
-		final StringBuilder buf = new StringBuilder();
-		buf.append("{node ");
-		buf.append(label(person));
-		buf.append(person.getId());
-		buf.append("};");
-		buf.append('\n');
-		return buf.toString();
-	}
-
-	private static String edge(final String from, final String to, final String label) {
-		final StringBuilder buf = new StringBuilder();
-		buf.append(from).append(" -> ").append(to);
-		buf.append("[label=\"").append(label).append("\"];");
 		return buf.toString();
 	}
 
@@ -149,7 +112,7 @@ public final class GraphVizTree {
 		final StringBuilder buf = new StringBuilder();
 		if (person != null) {
 			buf.append(getSubTree(person));
-			buf.append(INDENT).append(edge(person.getId().toString(), Long.toString(child), gender)).append('\n');
+			buf.append(INDENT).append(new Edge(person.getId().toString(), Long.toString(child), gender)).append('\n');
 		}
 		return buf.toString();
 	}
@@ -157,7 +120,7 @@ public final class GraphVizTree {
 	private String getSubTree(final Person person) {
 		final StringBuilder buf = new StringBuilder();
 
-		buf.append(INDENT).append(node(person));
+		buf.append(INDENT).append(new Node(label(person), person.getId().toString()));
 
 		buf.append(parent(person.getId(), person.getMother(), VENUS));
 		buf.append(parent(person.getId(), person.getFather(), MARS));
