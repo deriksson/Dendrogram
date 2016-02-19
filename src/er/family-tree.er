@@ -1,0 +1,20 @@
+[person] {bgcolor: "#d0e0d0"}
+  *id {label: "integer, not null"} 
+  name {label: "varchar"} 
+  title {label: "varchar"} 
+  +father {label: "integer"} 
+  +mother {label: "integer"} 
+ 
+[event_type] {bgcolor: "#d0e0d0"}
+  *id {label: "integer, not null"} 
+  name {label: "varchar"} 
+  
+[event] {bgcolor: "#d0e0d0"}
+  *id {label: "integer, not null"} 
+  +person {label: "integer, not null"} 
+  +type {label: "integer, not null"} 
+  date {label: "date"} 
+
+event_type 1--* event
+person 1--* event
+person 1--* person

@@ -5,7 +5,7 @@ an image file.
 
 ## Installation
 The genealogical data are kept in a relational database. You can use any relational database management system. The following are
-installation instructions for PostgreSQL:
+installation instructions for PostgreSQL.
 
 1. Create the genealogical database and a user account:
 > `psql -U postgres -h localhost -f src/sql/database.sql`
@@ -45,3 +45,11 @@ The DOT code may be redirected to a file, for further processing by the Graphviz
 
 These commands may be piped like this:
 >`dot -Tpng -Gcharset=utf8 -o/tmp/family-tree.png <(java -classpath dist/dendrogram.jar:lib/deploy/orm/hibernate/*:lib/deploy/logging/*:lib/deploy/jdbc/* se.abc.dendrogram.report.GraphVizTreeApplication 5)`
+
+The last two commands both create a PNG image file, `/tmp/family-tree.png` in this case. For other available image formats, please consult the GraphViz online documentation. Use any image viewer to look at the resulting file, e.g.:
+>`eog /tmp/familytree.png &`
+
+## Architecture
+The following diagram describes the family tree entity-relationship model. Ancestry is a recursive relationship and is displayed as a “pig's” ear of the person table.
+
+[![Entity-Relationship Diagram for Family Tree database](doc/entity-relationship-diagram.png)](doc/entity-relationship-diagram.pdf)
