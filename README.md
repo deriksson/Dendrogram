@@ -16,9 +16,9 @@ installation instructions for PostgreSQL.
 3. Optionally, populate the database with some sample data. You may of course also use your own genealogical data.
 > `psql -U genealogist -d family_tree -h localhost -f src/sql/sample-data.sql`
 
-The program creates a DOT script, that represents the family tree as a directed graph. The AT&T Labs Graphviz package is
-then used to generate an image file from the script. The following command installs the Graphviz package on a Debian
-based Linux system:
+The program creates a DOT script, that represents the family tree as a directed graph. The AT&T Labs
+[GraphViz](http://www.graphviz.org) package is then used to generate an image file from the script.
+The following command installs the Graphviz package on a Debian based Linux system:
 > `sudo apt-get install graphviz`
 
 Finally, you need to compile the Java application.
@@ -47,7 +47,7 @@ These commands may be piped like this:
 >`dot -Tpng -Gcharset=utf8 -o/tmp/family-tree.png <(java -classpath dist/dendrogram.jar:lib/deploy/orm/hibernate/*:lib/deploy/logging/*:lib/deploy/jdbc/* se.abc.dendrogram.report.GraphVizTreeApplication 5)`
 
 The last two commands both create a PNG image file, `/tmp/family-tree.png` in this case. For other available image formats, please consult the GraphViz online documentation. Use any image viewer to look at the resulting file, e.g.:
->`eog /tmp/familytree.png &`
+>`eog /tmp/family-tree.png &`
 
 ## Architecture
 The following diagram describes the family tree entity-relationship model. Ancestry is a recursive relationship and is displayed as a “pig's” ear of the person table.
