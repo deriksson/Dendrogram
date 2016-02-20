@@ -5,14 +5,26 @@
 # fields and relationships. To remedy this, the make file transforms
 # the intermediate DOT script.
 #
+MKDIR = mkdir -p
 DOC=../../doc
-TMP1 := $(shell mktemp -u).dot
-TMP2 := $(shell mktemp -u).dot
+OUT=out
+ERD_DOT=$(OUT)/family-tree.erd.dot
+DOT=$(OUT)/family-tree.dot
+PNG=$(OUT)/entity-relationship-diagram.png
+PDF=$(OUT)/entity-relationship-diagram.pdf
 
-doc:
-	erd -i family-tree.er -o $(TMP1)
-	sed "s/<FONT>/<FONT FACE=\"Helvetica\" POINT-SIZE=\"12\">/g" $(TMP1) > $(TMP2)
-	rm -f $(TMP1)
-	dot -Tpng -o $(DOC)/entity-relationship-diagram.png $(TMP2)
-	dot -Tpdf -o $(DOC)/entity-relationship-diagram.pdf $(TMP2)
-	rm -f $(TMP2)
+doc: $(OUT)
+	erd -i family-tree.er -o $(ERD_DOT)
+	sed "s/<FONT>/<FONT FACE=\"Helvetica\" POINT-SIZE=\"12\">/g" $(ERD_DOT) > $(DOT)
+	dot -Tpng -o $(PNG) $(DOT)
+	dot -Tpdf -o $(PDF) $(DOT)
+
+$(OUT):
+	${MKDIR} $(OUT)
+
+install: doc
+	cp $(PNG) $(PDF) $(DOC)
+
+clean:
+	test -n "$(OUT)" && rm -rf $(OUT)
+	rm -f *~
