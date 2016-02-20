@@ -1,6 +1,7 @@
 /build/
 /dist/
 /private/
+/src/er/out/
 *~
 .classpath
 .project
