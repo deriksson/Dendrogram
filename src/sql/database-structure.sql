@@ -1,20 +1,18 @@
 CREATE SEQUENCE person_id_seq;
 CREATE TABLE person (
-  id INTEGER NOT NULL DEFAULT nextval('person_id_seq'),
+  id integer NOT NULL DEFAULT nextval('person_id_seq') PRIMARY KEY,
   name varchar(100),
   title varchar(100),
-  father INTEGER REFERENCES person(id),
-  mother INTEGER REFERENCES person(id),
-  PRIMARY KEY (id)
+  father integer REFERENCES person(id),
+  mother integer REFERENCES person(id)
 );
 CREATE INDEX person_father_index ON person (father);
 CREATE INDEX person_mother_index ON person (mother);
 
 CREATE SEQUENCE event_type_id_seq;
 CREATE TABLE event_type (
-  id INTEGER NOT NULL DEFAULT nextval('event_type_id_seq'),
-  name varchar(20) NOT NULL,
-  PRIMARY KEY (id)
+  id integer NOT NULL DEFAULT nextval('event_type_id_seq') PRIMARY KEY,
+  name varchar(20) NOT NULL
 );
 
 CREATE SEQUENCE event_id_seq;
@@ -24,10 +22,9 @@ CREATE SEQUENCE event_id_seq;
 -- that enforces the constraint. There's no need to manually create indexes on unique
 -- columns; doing so would just duplicate the automatically-created index.
 CREATE TABLE event (
-  id INTEGER NOT NULL DEFAULT nextval('event_id_seq'),
-  person INTEGER NOT NULL REFERENCES person(id),
-  type INTEGER NOT NULL REFERENCES event_type(id),
-  date DATE,
-  PRIMARY KEY (id),
+  id integer NOT NULL DEFAULT nextval('event_id_seq') PRIMARY KEY,
+  person integer NOT NULL REFERENCES person(id),
+  type integer NOT NULL REFERENCES event_type(id),
+  date date,
   UNIQUE (person, type)
 );
